@@ -1,8 +1,6 @@
 import React from 'react'
 import { formatTimeAgo } from '../../helpers/formatTimeAgo'
-
 import Image from '../Image/Image'
-
 
 export const NewsBanner = ({item}) => {
   return (
@@ -12,9 +10,6 @@ export const NewsBanner = ({item}) => {
             <h1 className='text-2xl md:text-3xl lg:text-4xl font-bold'>{item.title}</h1>
             <p className='text-xl md:text-2xl text-[#6c7072] mb-10'>{formatTimeAgo(item.published)} by {item.author}</p>
         </div>
-        
-                    
-
     </div>
   )
 }

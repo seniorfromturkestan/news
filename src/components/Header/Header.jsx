@@ -1,16 +1,39 @@
-import React from 'react'
-import { formatDate } from '../../helpers/formatDate'
+import {useState} from "react";
+import dayjs  from 'dayjs';
+import { Link } from 'react-router-dom';
+import MobileMenu from "../MobileMenu/MobileMenu";
+import {AiOutlineClose, AiOutlineMenu} from 'react-icons/ai'
+import { FULL_DATE } from '../../helpers/formats';
 
 const Header = () => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
   return (
     <div className="w-full border-b border-[#c0c2c3] bg-white">
-        <header className='max-w-[1240px] mx-auto flex p-5 flex-col gap-1'>
-            <h1 className='uppercase text-4xl font-bold'>Newsletter asl</h1>
-            <p className='text-xl'>{formatDate(new Date())}</p>
-
+        <header className='max-w-[1240px] mx-auto flex p-5 items-center justify-between gap-1'>
+            <div>
+                <h1 className='uppercase text-4xl font-bold'>News</h1>
+                <p className='text-sm md:text-lg'>{ dayjs().format(FULL_DATE) }</p>
+            </div>
+            <div className="hidden md:block">
+              <ul className="flex font-semibold  text-xl md:text-2lg lg:text-2xl">
+                <Link to={`/`} className="p-3">Actual News</Link>
+                <Link to={`/company`} className="p-3">Company</Link>
+                <Link className="p-3">Careers</Link>
+                <Link className="p-3">About us</Link>
+              </ul>
+            </div>
+            <div onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} 
+                className="flex md:hidden ml-auto  cursor-pointer z-30">
+                { isMobileMenuOpen ? <AiOutlineClose size = {35}/> : <AiOutlineMenu size={35} />}
+            </div>
+            <MobileMenu isOpen={isMobileMenuOpen}/>
         </header>
     </div>
   )
 }
 
 export default Header
+
+
+

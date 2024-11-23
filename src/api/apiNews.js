@@ -1,17 +1,20 @@
-import axios from "axios";
-
-const BASE_URL = "https://api.currentsapi.services/v1/";
-const API_KEY = "8XVmoIwbWRsBBlW4FHUP7CSDa4lofBFDWAJM3QhcEx8IhOOP";
+import { axiosInstance } from "./axiosInstance";
 
 export const getNews = async () => {
-  try {
-    const response = await axios.get(`${BASE_URL}latest-news`, {
-      params: {
-        apiKey: API_KEY,
-      },
-    });
-    return response.data;
-  } catch (error) {
-    console.error("Ошибка при запросе новостей:", error);
-  }
+  const response = await axiosInstance.get(`latest-news`);
+
+  return response;
 };
+
+export const getNewsById = async (newsId) => {
+  const response = await axiosInstance.get(`latest-news/${newsId}`);
+
+  return response;
+};
+
+export const createNews = async (newsBody) => {
+  const response = await axiosInstance.post(`news`, newsBody);
+
+  return response;
+}
+
